@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>صفحة الترحيب</title>
+
+
+<style>
+    *{
+        box-sizing:border-box;
+    }
+    body{
+        background:#894c5e ;
+        color:#fff; margin:0; padding:10px;
+    }
+
+    
+    nav{
+        background:rgba(103, 6, 6, 0.133); padding:10 px ; border-radius:5px;
+        margin-bottom:30px;
+    }
+    nav a{
+        color:#554444;  
+        margin:0 10px;
+        font-weight:bold;
+    }
+    nav a:hover{
+        color:#ffc107;
+    }
+
+    form{
+        background:#fff1;
+         padding:20px; 
+         border-radius:8px;
+        
+    }
+    label{display:block; margin-bottom:.3rem;}
+    input[type="text"]{
+        width:100%; padding:.6rem; border-radius:6px; border:none;
+        margin-bottom:1rem;
+    }
+    button{
+        background:#ff4081; 
+        color:#fff; 
+        border:none; 
+        padding:10px 15px;
+        border-radius:6px; 
+        cursor:pointer; 
+        font-weight:bold;
+    }
+    button:hover{background:#e91e63;}
+
+   
+    #greetMsg{
+        margin-top:10px;
+        font-size:20px;
+        color:#ffe;
+        }
+</style>
+</head>
+
+<body>
+
+    
+    <div id="welcome">مرحباً بك  </div>
+    
+
+    
+    <nav>
+        <a href="#">الرئيسية</a>
+        <a href="#">حول</a>
+        <a href="#">اتصل بنا</a>
+    </nav>
+
+   
+    <form id="nameForm">
+        <label for="userName">أدخل اسمك:</label>
+        <input type="text" id="userName" required />
+        <button type="submit">أرسل</button>
+        <div id="greetMsg"></div>
+    </form>
+
+
+<script>
+const welcomeEl = document.getElementById("welcome");
+const messages = [
+    "مرحباً بك  ",
+    "أهلاً وسهلاً" ,
+    "السلام عليكم"
+];
+let idx = 0;
+setInterval(() => {
+    idx = (idx + 1) % messages.length;
+    welcomeEl.textContent = messages[idx];
+}, 3000);   
+
+
+let form = document.getElementById("nameForm");
+let greetMsg = document.getElementById("greetMsg");
+
+
+
+
+document.getElementById("userName").addEventListener("input", e =>{
+    const name = e.target.value.trim();
+    greetMsg.textContent = name ? `مرحباً، ${name}!` : "";
+});
+</script>
+
+</body>
+</html>

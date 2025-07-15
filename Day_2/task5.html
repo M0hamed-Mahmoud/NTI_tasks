@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+   <input type="number" id="score" placeholder="">
+   <button onclick="checkResult()"> احسب التقدير </button>
+   <h1> محمد محمود احمد </h1>
+   <p id="result"> </p>
+   <script>
+    function checkResult(){
+        let result = document.getElementById("score").value ;
+        if( result >= 90 ){
+            document.getElementById("result").innerHTML = "ممتاز" 
+        }
+        else if(result >=80){
+            document.getElementById("result").innerHTML = "جيد جدا" 
+        }
+        else if(result >=70){
+            document.getElementById("result").innerHTML = "جيد " 
+        }
+        else{
+            document.getElementById("result").innerHTML = "راسب" 
+        }
+    }
+   </script>
+</body>
+</html>
