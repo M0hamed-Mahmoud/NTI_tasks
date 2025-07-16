@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body class=" bg-danger">
+    <div class="container py-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <table class="table table-primary">
+                    <thead>
+                        <tr class="table-dark">
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-info">
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        </tr>
+                        <tr class="table-secondary">
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        </tr>
+                        <tr class="table-warning">
+                        <th scope="row">3</th>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>@social</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <form class="was-validated">
+                    <div class="mb-3">
+                        <label for="validationTextarea1" class="form-label">اسم الطالب </label>
+                        <input class="form-control" id="validationTextarea1" placeholder="ادخل اسم الطالب" type="text" required> </input>
+                        <div class="invalid-feedback">
+                            من فضلك ادخل الاسم  
+                        </div>
+                    </div>
+                    <div class="mb-3">    
+                        <label for="validationTextarea" class="form-label">الايميل   </label>
+                        <input class="form-control" id="validationTextarea2" placeholder="ادخل الايميل " type="email" required> </input>
+                        <div class="invalid-feedback">
+                            من فضلك ادخل الايميل  
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="validationTextarea" class="form-label">الرقم القومي    </label>
+                        <input class="form-control" id="validationTextarea3" placeholder="ادخل  الرقم القومي " type="text" required pattern="\d{14}" maxlength="14" inputmode="numeric" > </input>
+                        <div class="invalid-feedback">
+                            ادخل الرقم القومي يتكون من 14 رقم         
+                        </div>
+                    </div>    
+                    <div class="mb-3">
+                        <label for="validationTextarea" class="form-label"> رقم الهاتف     </label>
+                        <input class="form-control" id="validationTextarea4" placeholder="ادخل  رقم الهاتف   " type="text" required pattern="\d{11}" maxlength="11" inputmode="numeric" > </input>
+                        <div class="invalid-feedback">
+                            ادخل الرقم الهاتف يتكون من 11 رقم         
+                        </div>
+                    </div>    
+                    <div class="mb-3">
+                        <button class="btn btn-primary" type="submit"  >ارسال  </button>
+                        <button class="btn btn-primary" type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">اقرأ المزيد </button>
+                    </div>
+                    
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">ملحوظة هامة </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <p> ادخل الرقم القومي ورقم الهاتف بشكل صحيح </p>
+                <p>الرقم القومي 14 رقم </p>
+                <p>رقم الهاتف 11 رقم </p>
+         
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+<script src="js/bootstrap.bundle.js"> </script>
+</body>
+</html>
