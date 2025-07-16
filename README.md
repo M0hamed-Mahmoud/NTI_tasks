@@ -1,1 +1,1 @@
-# NTI_DAY1-TASK
+# NTI_TASKS
