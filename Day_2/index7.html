@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index7</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body { 
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20 px ;
+
+        
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form {
+            background: white ;
+            padding: 20px ;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ccc;
+
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th {
+            background: #007bff;
+            color: white ;
+            padding: 10px ;
+        }
+        table td {
+            padding: 10px ;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        ul,ol {
+            background: #fff;
+            padding: 15px 15px 15px 50px ;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <form 
+        action="submit.php" 
+        method="post" 
+        class="log-form">
+
+            <!-- start the first input with its label -->
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="fullname" class="form-input"/>
+            <!-- end the first input with its label -->
+
+            <!-- start the second input with its label -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-input"/>
+            <!-- end the second input with its label -->
+
+            <!-- start the select with its label -->
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" class="form-input">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <!-- end the select input with its label -->
+
+            <!-- start the textarea with its label -->
+            <label for="message">Message:</label>
+            <textarea   class="form-input"
+                        id="message" 
+                        name="message" 
+                        rows="4" 
+                        cols="30"></textarea>
+            <!-- end the textarea with its label -->
+
+        <button type="submit" class="form-input" >send data</button>
+    </form>
+
+    <h3>Frontend Technologies to Learn:</h3>
+    <ol class="first-ol">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ol>
+
+    <ol class="second-ol">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ol>
+
+    <h3>Shopping List:</h3>
+    <ul class="first-ul">
+      <li>Milk</li>
+      <li>Bread</li>
+      <li>Eggs</li>
+    </ul>
+
+    <ul class="second-ul">
+      <li>Milk</li>
+      <li>Bread</li>
+      <li>Eggs</li>
+    </ul>
+
+    <table class="log-table" border="1">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Subject</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Ahmed</td>
+          <td>Math</td>
+          <td>95</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Salma</td>
+          <td>Science</td>
+          <td>88</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>sami</td>
+          <td>geography</td>
+          <td>75</td>
+        </tr>
+      </tbody>
+    </table>
+</body>
+</html>

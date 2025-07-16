@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       *{ 
+        box-sizing: border-box;
+        }
+        body { background:linear-gradient(45deg,#3f0,blue
+            ) ;
+            min-height: 100vh;
+            padding: auto ;
+            margin:0;
+        }
+        .log-form {
+            width: fit-content;
+            margin: 0 auto ;
+            padding: 50px ;
+            background-color: #f2f2f2;
+        }
+        select,input,button,textarea {
+             display: block;
+
+
+        }
+
+    </style>
+</head>
+<body>
+    <form action="" class ="log-form">
+        <label for=""> Full name </label>
+        <br>
+        <input type="text" name="full name">
+        <br> 
+        <label for=""> Email </label>
+        <br>
+        <input type="email" name="email"> 
+        <br>
+        <label for=""> Gender </label>
+        <br>
+        <select name="gender" id="gender">
+            <option value="male"> male </option>
+            <option value="female">female</option>
+        </select> 
+        <br>
+        <label for=""> Message </label>
+        <br>
+        <textarea id="message" name="message"></textarea> 
+
+       <button type="submit"> login </button>
+    </form>
+    
+</body>
+</html>
