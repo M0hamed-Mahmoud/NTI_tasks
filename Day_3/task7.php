@@ -96,7 +96,7 @@
                     </thead>
                     <tbody>
                         <?php
-                        // بيانات ثابتة لثلاثة طلاب
+                        
                         $students = [
                             ['name' => 'خالد',   'mark' => 90],
                             ['name' => 'علي',    'mark' => 72],
@@ -104,7 +104,7 @@
                         ];
 
                         foreach ($students as $st) {
-                            $grade = '';             // نحسب التقدير حسب الدرجة
+                            $grade = '';            
                             if     ($st['mark'] >= 90) { $grade = 'امتياز'; }
                             elseif ($st['mark'] >= 80) { $grade = 'جيد جدًا'; }
                             elseif ($st['mark'] >= 70) { $grade = 'جيد'; }
