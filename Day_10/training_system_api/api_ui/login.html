@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="card login-card">
+        <h3 class="card-title text-center mb-4">Admin Login</h3>
+        <form id="loginForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="email@example.com" required class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password" required class="form-control" />
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Function to handle the login process
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(this).entries());
+
+            fetch("./login.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.status === "success" && res.token) {
+                    // On successful login, store token and user info
+                    localStorage.setItem("token", res.token);
+                    localStorage.setItem("user", res.name);
+                    alert("✅ Login successful! Redirecting...");
+                    window.location.href = "courses.html"; // Redirect to the main page
+                } else {
+                    // Show error message from the server
+                    alert("❌ " + res.message);
+                }
+            })
+            .catch(err => {
+                console.error("Login request failed:", err);
+                alert("An error occurred during login. Please try again.");
+            });
+        });
+
+        // Function to check if user is already logged in when the page loads
+        function checkExistingLogin() {
+            const existingToken = localStorage.getItem("token");
+
+            if (existingToken) {
+                // If a token exists, ask the user what they want to do
+                if (confirm("⚠️ You are already logged in. Do you want to log out?")) {
+                    // User wants to log out
+                    localStorage.clear();
+                    // Also clear any session cookies for good measure
+                    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    alert("You have been logged out.");
+                } else {
+                    // User wants to stay logged in, so redirect them
+                    window.location.href = "courses.html";
+                }
+            }
+        }
+
+        // Run the check as soon as the page loads
+        document.addEventListener("DOMContentLoaded", checkExistingLogin);
+    </script>
+
+</body>
+</html>
