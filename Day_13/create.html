@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post" id="sendData">
+        <input type="text" name="title" id="title" placeholder="enter the title">
+        <input type="text" name="description" id="description" placeholder="enter the description">
+        <input type="number" name="hours" id="hours"placeholder="enter the hours">
+        <input type="number" name="price" id="price"placeholder="enter the price">
+        <input type="submit" value="submit">
+    </form>
+    <script>
+        var form = document.getElementById('sendData');
+        form.addEventListener('submit',function(event){
+            event.preventDefault();
+            console.log(this.title.value);
+            console.log(this.description.value);
+            console.log(this.hours.value);
+            console.log(this.price.value);
+            fetch('http://localhost/session/day_13/post.php' , {
+                method: 'POST' , 
+               body: JSON.stringify({title:this.title.value , description:this.description.value , hours:this.hours.value , price:this.price.value}),
+                headers: {"Content-Type": "application/json"}
+            });
+
+        })
+    </script>
+    
+</body>
+</html>

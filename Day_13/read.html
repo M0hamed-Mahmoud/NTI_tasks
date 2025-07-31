@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="myList"></ul>
+    <script>
+        fetch('http://localhost/session/day_13/get.php').then(
+            response => response.json()
+        ).then(
+            data => {
+                console.log(data);
+                data.forEach(e => {
+                    var printed_data = document.getElementById("myList");
+                    printed_data.innerHTML += "<li>" + e.title + "</li>";
+                })
+            }
+        )
+    </script>
+</body>
+</html>
+
