@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Courses</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Training System</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="students.html">Students</a></li>
+            <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+            <li class="nav-item"><a class="nav-link" href="enrollments.html">Enrollments</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- View Courses -->
+      <div class="row d-flex justify-content-center ">
+        <div class="col-8">
+          <h3 class="text-center my-3">Courses List</h3>
+          <div class="row" id="courses"></div>
+        </div>
+      </div>
+      <hr/>
+
+      <!-- Add Course -->
+      <div class="row d-flex justify-content-center my-4">
+        <div class="col-md-6">
+          <h4>Add New Course</h4>
+          <form id="addCourseForm" class="mb-4">
+            <input class="form-control mb-2" type="text" placeholder="Course Title" name="title" required>
+            <input class="form-control mb-2" type="text" placeholder="Description" name="description">
+            <input class="form-control mb-2" type="number" step="0.01" placeholder="Hours" name="hours">
+            <input class="form-control mb-2" type="number" step="0.01" placeholder="Price" name="price">
+            <button type="submit" class="btn btn-success">Add Course</button>
+          </form>
+        </div>
+      </div>
+      <hr/>
+      
+      <!-- Edit Course -->
+      <div class="row d-flex justify-content-center my-4">
+        <div class="col-md-6">
+          <h4>Edit Course</h4>
+          <select id="put-options" onchange="loadCourseForEdit(this.value)" class="form-control mb-2">
+            <option value="">Select Course Title</option>
+          </select>
+    
+          <form id="editCourseForm" class="mb-4">
+            <div class="selected" id="selected"></div>
+            <input class="form-control mb-2" type="number" placeholder="Course ID" name="id" readonly required hidden>
+            <input class="form-control mb-2" type="text" placeholder="New Title" name="title">
+            <input class="form-control mb-2" type="text" placeholder="New Description" name="description">
+            <input class="form-control mb-2" type="number" step="0.01" placeholder="New Hours" name="hours">
+            <input class="form-control mb-2" type="number" step="0.01" placeholder="New Price" name="price">
+            <button type="submit" class="btn btn-primary">Update Course</button>
+          </form>
+        </div>
+      </div>
+      <hr/>
+
+      <!-- Delete Course -->
+      <div class="row d-flex justify-content-center my-4">
+        <div class="col-md-6">
+            <h4>Delete Course</h4>
+            <form id="deleteCourseForm" class="mb-4">
+                <select id="delete-options" class="form-control mb-2" name="id" required>
+                    <option value="">Select Course to Delete</option>
+                </select>
+                <button type="submit" class="btn btn-danger">Delete Course</button>
+            </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const coursesAPI = "http://localhost/session/day_10/training_system_api/courses_api/";
+
+      // Read all courses and populate lists
+      function readAll() {
+        fetch(coursesAPI)
+          .then(res => res.json())
+          .then(data => {
+            let html = "";
+            let options = '<option value="">Select Course...</option>';
+            data.forEach(course => {
+              html += `<div class="col-md-4">
+                <div class="card shadow p-3 mb-3">
+                  <h5>${course.title}</h5>
+                  <p>Description: ${course.description}</p>
+                  <p>Hours: ${course.hours}</p>
+                  <p>Price: ${course.price}</p>
+                </div>
+              </div>`;
+              options += `<option value="${course.id}">${course.title}</option>`;
+            });
+            document.getElementById("courses").innerHTML = html;
+            document.getElementById("put-options").innerHTML = options;
+            document.getElementById("delete-options").innerHTML = options;
+          });
+      }
+
+      // Load a single course's data into the edit form
+      function loadCourseForEdit(id) {
+        if (!id) return;
+        fetch(coursesAPI + '?id=' + id)
+            .then(res => res.json())
+            .then(data => {
+                const course = data[0];
+                const theForm = document.getElementById("editCourseForm");
+                theForm.querySelector('#selected').innerHTML = `<hr/>Editing: <strong><u>${course.title}</u></strong><hr/>`;
+                theForm.querySelector('input[name="id"]').value = course.id;
+                theForm.querySelector('input[name="title"]').value = course.title;
+                theForm.querySelector('input[name="description"]').value = course.description;
+                theForm.querySelector('input[name="hours"]').value = course.hours;
+                theForm.querySelector('input[name="price"]').value = course.price;
+            });
+      }
+
+      // Initial Load
+      readAll();
+
+      // POST (Add) Form
+      document.getElementById("addCourseForm").addEventListener("submit", function(e){
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+          title: form.title.value,
+          description: form.description.value,
+          hours: form.hours.value,
+          price: form.price.value
+        };
+        fetch(coursesAPI, {
+          method: "POST",
+          body: JSON.stringify(data)
+        }).then(res => res.json()).then(res => {
+          alert("✅ Course Added!");
+          readAll();
+          form.reset();
+        });
+      });
+
+      // PUT (Edit) Form
+      document.getElementById("editCourseForm").addEventListener("submit", function(e){
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+          id: form.id.value,
+          title: form.title.value,
+          description: form.description.value,
+          hours: form.hours.value,
+          price: form.price.value
+        };
+
+        fetch(coursesAPI, {
+          method: "PUT",
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(res => {
+          alert("🔁 Course Updated!");
+          readAll();
+          form.reset();
+          form.querySelector('#selected').innerHTML = '';
+        });
+      });
+
+      // DELETE Form
+      document.getElementById("deleteCourseForm").addEventListener("submit", function(e){
+          e.preventDefault();
+          const courseId = e.target.id.value;
+          if (!courseId) {
+              alert("Please select a course to delete.");
+              return;
+          }
+          if (!confirm("Are you sure you want to delete this course? This cannot be undone.")) {
+              return;
+          }
+          fetch(coursesAPI, {
+              method: "DELETE",
+              body: JSON.stringify({ id: courseId })
+          })
+          .then(res => res.json())
+          .then(res => {
+              alert("🗑️ " + res.message);
+              readAll();
+              e.target.reset();
+          });
+      });
+    </script>
+</body>
+</html>
+
